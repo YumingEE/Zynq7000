@@ -1,0 +1,16 @@
+问题：
+
+1.ifconfig命令没有输出,ifconfig -a 有eth0和lo，但未分配ip地址
+可能原因：启动时未配置网络
+A.临时解决办法：
+a.配置localhost
+#ifconfig lo 127.0.0.1 netmask 255.255.255.0
+b.配置eth0
+#ifconfig eth0 192.168.2.23 netmask 255.255.255.0
+c.若ping不通内网,需要配置gateway
+#route add default gw 192.168.2.1
+d.若ping不通外网,需要配置dns
+#vi /etc/etc/resolv.conf 添加以下内容
+	nameserver 192.168.2.1
+注: 本机IP为192.168.2.23;网关为192.168.2.1;DNS服务器为192.168.2.1;
+	根据自己实际情况进行配置
